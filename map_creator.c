@@ -6,20 +6,18 @@
 /*   By: dshereme <dshereme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 20:30:43 by dshereme          #+#    #+#             */
-/*   Updated: 2019/02/02 21:23:08 by dshereme         ###   ########.fr       */
+/*   Updated: 2019/02/04 03:57:37 by dshereme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-char	**map_creator(int figures)
+char	**map_creator(int side)
 {
 	char	**map;
 	int		idx;
 	int		j;
-	int		side;
 
-	side = ft_sqrt(figures) * 2;
 	idx = -1;
 	map = (char **)malloc(sizeof(char**) * side + 1);
 	map[side] = NULL; // Чистить ли нулл?
@@ -36,16 +34,16 @@ char	**map_creator(int figures)
 void	free_map(char **map)
 {
 	int		idx;
-	
+
 	idx = -1;
-	while(map[++idx])
+	while (map[++idx])
 		free(map[idx]);
 	free(map);
 }
 
 void	show_map(char **map)
 {
-	while(*map)
+	while (*map)
 	{
 		printf("%s\n", *map);
 		map++;
@@ -54,10 +52,16 @@ void	show_map(char **map)
 
 int		ft_sqrt(int nb)
 {
-	int	re;
+	int		re;
 
 	re = 1;
 	while (re * re < nb)
 		re++;
 	return (re * re == nb ? re : ++re);
+}
+
+void	map_resize(char ***map, int map_side)
+{
+	free_map(*map);
+	*map = map_creator(map_side + 1);
 }

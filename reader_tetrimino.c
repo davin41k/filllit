@@ -6,14 +6,14 @@
 /*   By: dshereme <dshereme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 22:37:35 by dshereme          #+#    #+#             */
-/*   Updated: 2019/02/02 19:39:47 by dshereme         ###   ########.fr       */
+/*   Updated: 2019/02/04 04:09:30 by dshereme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
 /*возвращает указатель на голову списка из координат*/
- t_tetrimino	*read_file(char *filename)
+t_tetrimino		*read_file(char *filename)
 {
 	char		*line;
 	int			fd;
@@ -27,20 +27,12 @@
 	{
 		line[ret] = '\0';
 		if (tetrimino_norme(line))
-		{
-			//head = to_coordinate(line);
 			create_tetrlist(&head, line);
-			//printf("\tLetter:\t%c\n", head->letter);
-			//show_coordinate(head);
-			// printf("%s", line);
-		}
 	}
-	//show_tetrlist(head);
-
 	return (head);
 }
 
-void	shift_figure(char *tetr)
+void			shift_figure(char *tetr)
 {
 	int		idx;
 	int		shiftx;
@@ -49,7 +41,6 @@ void	shift_figure(char *tetr)
 	idx = -1;
 	shiftx = shift_x(tetr);
 	shifty = shift_y(tetr);
-
 	while (tetr[++idx])
 	{
 		if (tetr[idx] == '#')
@@ -60,8 +51,7 @@ void	shift_figure(char *tetr)
 	}
 }
 
-/*считает на сколько нужно сдвинуть фигуру влево*/
-int		shift_x(char *tetr)
+int				shift_x(char *tetr)
 {
 	int		shift;
 	int		idx;
@@ -81,8 +71,8 @@ int		shift_x(char *tetr)
 	idx = -1;
 	return (shift);
 }
-/*считает сколько линий нужно сдвинуть фигуру вверх*/
-int		shift_y(char *tetr)
+
+int				shift_y(char *tetr)
 {
 	int		lineas;
 
@@ -90,10 +80,9 @@ int		shift_y(char *tetr)
 	while (*tetr)
 	{
 		if (*tetr == '#')
-			break;
+			break ;
 		lineas++;
 		tetr++;
 	}
 	return (lineas / 5);
 }
- 
