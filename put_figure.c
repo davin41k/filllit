@@ -6,7 +6,7 @@
 /*   By: dshereme <dshereme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 21:27:58 by dshereme          #+#    #+#             */
-/*   Updated: 2019/02/04 04:05:55 by dshereme         ###   ########.fr       */
+/*   Updated: 2019/02/07 19:33:16 by dshereme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		tryto_put(char **map, int map_side, t_tetrimino *tetr)
 	idx = -1;
 	goals = 0;
 	if (tetr->crnt_pos.x >= map_side || tetr->crnt_pos.y >= map_side)
-		return (-1);
+		return (0);
 	while (++idx < 4)
 	{
 		x = tetr->crnt_pos.x + tetr->points[idx].x;

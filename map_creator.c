@@ -6,7 +6,7 @@
 /*   By: dshereme <dshereme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 20:30:43 by dshereme          #+#    #+#             */
-/*   Updated: 2019/02/04 03:57:37 by dshereme         ###   ########.fr       */
+/*   Updated: 2019/02/06 22:09:59 by dshereme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	**map_creator(int side)
 
 	idx = -1;
 	map = (char **)malloc(sizeof(char**) * side + 1);
-	map[side] = NULL; // Чистить ли нулл?
+	map[side] = NULL;
 	while (++idx < side)
 	{
 		j = -1;
@@ -57,11 +57,12 @@ int		ft_sqrt(int nb)
 	re = 1;
 	while (re * re < nb)
 		re++;
-	return (re * re == nb ? re : ++re);
+	//return (re * re == nb ? re : ++re);
+	return (re);
 }
 
 void	map_resize(char ***map, int map_side)
 {
 	free_map(*map);
-	*map = map_creator(map_side + 1);
+	*map = map_creator(map_side);
 }

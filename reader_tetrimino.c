@@ -6,7 +6,7 @@
 /*   By: dshereme <dshereme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 22:37:35 by dshereme          #+#    #+#             */
-/*   Updated: 2019/02/04 04:09:30 by dshereme         ###   ########.fr       */
+/*   Updated: 2019/02/07 19:33:14 by dshereme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,14 @@ t_tetrimino		*read_file(char *filename)
 		line[ret] = '\0';
 		if (tetrimino_norme(line))
 			create_tetrlist(&head, line);
+		else
+		{
+			printf("Wrong tetrimino\n");
+			exit(0);
+		}
 	}
+	close(fd);
+	free(line);
 	return (head);
 }
 
