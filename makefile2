@@ -1,0 +1,76 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: dshereme <dshereme@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/02/04 06:16:58 by dshereme          #+#    #+#              #
+#    Updated: 2019/02/06 22:18:50 by dshereme         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+.PHONY: all clean fclean re
+
+NAME	:=	fillit
+
+CC		:=	gcc
+
+FLAGS	:=	-Wall -Werror -Wextra
+
+SRC_DIR	=	./src/
+OBJ_DIR	=	./obj/
+INC_DIR	=	./inc/
+LIB_DIR	=	./lib/
+
+INCLUDES = ./inc/
+
+SRC		:=	main.c\
+			put_figure.c\
+			to_coordinate_tetrimino.c\
+			map_creator.c\
+			reader_tetrimino.c\
+			list_function.c\
+			norme_tetrimino.c\
+
+OBJ		:=	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))
+
+$(OBJ_DIR)%.o: %.c
+
+LIBFT	=	$(LIBFT_DIR)libft.a
+	LIBFT_DIR :=	$(LIB_DIR)libft/
+	LIBFT_INC :=	$(LIB_DIR)includes/
+	LIBFT_FLAGS	:=	-lft -L $(LIB_DIR)
+
+	LINK_FLAGS	:=	$(LIB_FLAGS)
+
+	HEADER_FLAGS	:=	-I	$(INC_DIR)	-I $(LIB_INC)
+
+
+all: $(NAME)
+
+$(NAME): $(LIB) $(OBJ)
+	$(CC) $(OBJ) $(LINK_FLAGS) -o $(NAME)
+
+$(OBJ): | $(OBJ_DIR)
+
+$(OBJ_DIR):
+	mkdir $(OBJ_DIR)
+
+$(OBJ_DIR)%.o: %.c
+	$(CC) -c $< -o $@ $(CC_FLAGS) $(HEADER_FLAGS)
+
+$(LIBFT):
+	make -C $(LIBFT_DIR)
+
+clean:
+	rm -f $(OBJ)
+	make clean -C $(LIBFT_DIR)
+fclean: clean
+	rm -f $(NAME)
+	rm -rf $(OBJ_DIR)
+	make fclean -C $(LIBFT_DIR)
+
+re: fclean all
+
+vpath %.c $(SRC_DIR)
